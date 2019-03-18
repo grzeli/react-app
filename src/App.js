@@ -1,27 +1,68 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Person from './Person/Person.js';
 
 class App extends Component {
+  state = {
+    numbers: [
+      { name: 'judie', number:'18'},
+      { name: 'judies', number: '28'},
+      { name: 'judiesh', number: '38'}
+    ]
+  }
+
+  clickHandler = (newName) => {
+    this.setState({
+      numbers: [
+        { name: newName, number:'18'},
+        { name: 'judies', number: '28'},
+        { name: 'judiesh', number: '18'},
+      ] 
+    })
+  }
+  
+  inputChangeHandler = (event) => {
+    this.setState ({
+      numbers: [
+        { name: 'judie', number:'18'},
+        { name: event.target.value, number: '28'},
+        { name: 'judiesh', number: '38'}
+      ]
+    })
+  }
+
   render() {
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '5px 10px',
+      cursor: 'pointer'
+    };
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <h1>Hello world!</h1>
+        <button 
+        style={style}
+        onClick={() => this.clickHandler("mudie")}>
+          Switch me!
+        </button>
+        <Person 
+        name={this.state.numbers[0].name} 
+        number={this.state.numbers[0].number} />
+        <Person
+        name={this.state.numbers[1].name} 
+        number={this.state.numbers[1].number}
+        click={this.clickHandler.bind(this, 'mudiess')}
+        changed={this.inputChangeHandler} >
+          Ferari
+        </Person>
+        <Person
+        name={this.state.numbers[2].name} 
+        number={this.state.numbers[2].number}/>
       </div>
     );
+    //return React.createElement('div', {className: 'App'}, React.createElement('h1', 'null', 'hi hello all!!'));
   }
 }
 
