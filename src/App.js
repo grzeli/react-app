@@ -5,31 +5,31 @@ import Person from './Person/Person.js';
 class App extends Component {
   state = {
     numbers: [
-      { name: 'judie', number:'18'},
-      { name: 'judies', number: '28'},
-      { name: 'judiesh', number: '38'}
+      { id:'1', name: 'judie', number:'18'},
+      { id:'fdfd', name: 'judies', number: '28'},
+      { id:'dfsgsdg', name: 'judiesh', number: '38'}
     ],
     showPersons: false
   }
 
-clickHandler = (newName) => {
-  this.setState({
-    numbers: [
-      { name: newName, number:'18'},
-      { name: 'judies', number: '28'},
-      { name: 'judiesh', number: '18'},
-    ] 
-  })
+inputChangeHandler = ( event, id ) => {
+  const personIndex = this.state.numbers.findIndex(p => {
+    return p.id === id;
+  });
+  const person = {
+    ...this.state.numbers[personIndex]
+  };
+  person.name = event.target.value;
+  const persons = [...this.state.numbers];
+  persons[personIndex] = person;  
+  this.setState( {numbers: persons} )
 }
 
-inputChangeHandler = (event) => {
-  this.setState ({
-    numbers: [
-      { name: 'judie', number:'18'},
-      { name: event.target.value, number: '28'},
-      { name: 'judiesh', number: '38'}
-    ]
-  })
+deletePersonHandler = (personIndex) => {
+  //const persons = this.state.numbers;
+  const persons = [...this.state.numbers];
+  persons.splice(personIndex, 1);
+  this.setState({numbers: persons})
 }
 
 togglePersonHandler = () => {
@@ -39,11 +39,12 @@ togglePersonHandler = () => {
 
 render() {
   const style = {
-    backgroundColor: 'white',
+    backgroundColor: 'green',
     font: 'inherit',
     border: '1px solid blue',
     padding: '5px 10px',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    color:'white',
   };
 
   let persons = null;
@@ -51,25 +52,35 @@ render() {
   if (this.state.showPersons) {
     persons = (
       <div>
-      <Person 
-      name={this.state.numbers[0].name} 
-      number={this.state.numbers[0].number} />
-      <Person
-      name={this.state.numbers[1].name} 
-      number={this.state.numbers[1].number}
-      click={this.clickHandler.bind(this, 'mudiess')}
-  changed={this.inputChangeHandler} >
-    Ferari
-  </Person>
-  <Person
-  name={this.state.numbers[2].name} 
-  number={this.state.numbers[2].number}/>
-    </div> 
-  )
+      {this.state.numbers.map((person, index) => {
+       return <Person 
+       click={() => this.deletePersonHandler(index)}
+      name={person.name}
+      number={person.number}
+      key={person.id}
+      changed={(event) => this.inputChangeHandler(event, person.id)} />
+})}
+  </div> 
+);
+style.backgroundColor = 'red';
+style[':hover'] = {
+  backgroundColor: 'salmon',
+  color:'black'
+  }
 }
+
+const classes = [];
+if(this.state.numbers.length <= 2) {
+  classes.push('active');
+}
+if (this.state.numbers.length <= 1) {
+  classes.push('bold');
+}
+
 return (
   <div className="App">
   <h1>Hello world!</h1>
+  <p className={classes.join(' ')}>dzin dobry</p>
   <button 
   style={style}
   onClick={this.togglePersonHandler}>

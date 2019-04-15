@@ -1,3 +1,23 @@
 .App {
   text-align: center;
 }
+
+.active{
+  border:1px solid gray;
+  background-color: #59abe3;
+  position:relative;
+  display:block;
+  width:max-content;
+  text-align: center;
+  margin:auto;
+  margin-bottom: 20px;
+  padding:5px 10px 10px 10px;
+  border-radius:19px;
+  opacity:0.7;
+  box-shadow: 0 5px 10px black;
+  cursor:default;
+}
+
+.bold {
+  font-weight: bold;
+}
