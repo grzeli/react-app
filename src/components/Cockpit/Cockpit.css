@@ -1,0 +1,40 @@
+.active{
+  border:1px solid gray;
+  background-color: #59abe3;
+  position:relative;
+  display:block;
+  width:max-content;
+  text-align: center;
+  margin:auto;
+  margin-bottom: 20px;
+  padding:5px 10px 10px 10px;
+  border-radius:19px;
+  opacity:0.7;
+  box-shadow: 0 5px 10px black;
+  cursor:default;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.Cockpit button{
+  border:1px solid blue;
+  padding:8px 16px;
+  background-color:green;
+  font:inherit;
+  color:white;
+  cursor:pointer;
+}
+
+.Cockpit button:hover{
+  background-color:lightgreen;
+  color:black;
+}
+.Cockpit button.Red{
+  background-color: Red;
+}
+.Cockpit button.Red:hover{
+  background-color:salmon;
+  color:black;
+}
